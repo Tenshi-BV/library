@@ -1,0 +1,8 @@
+#shelf {
+    display: flex;
+    border: 10px solid brown;
+}
+
+#shelf > div {
+    border: 4px solid black;
+}
