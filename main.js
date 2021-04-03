@@ -1,7 +1,10 @@
 let myLibrary = [];
 
-function Book(name) {
+function Book(name, author, pages, status) {
     this.name = name;
+    this.author = author;
+    this.pages = pages;
+    this.status = status;
 }
 
 function addBookToLibrary(name) {
@@ -24,12 +27,22 @@ const createButton = document.querySelector("#newbook");
 createButton.addEventListener('click', () => displayForm());
 
 function displayForm() {
-    var title = prompt("What's the book title?");
-    var author = prompt("Who wrote it?");
-    var pageCount = prompt("How many pages does it have?");
-    var status = confirm("Have you read it?");
+    var title;
+    var author;
+    var pageCount;
+    var status;
+    title = prompt("What's the book title?");
+    author = prompt("Who wrote it?");
+    pageCount = prompt("How many pages does it have?");
+    status = confirm("Have you read it?");
+    if (title == null || author == null || pageCount == null) {
+        alert("invalid input");
+    } else {
+        const thing = new Book(title, author, pageCount, status);
+        addBookToLibrary(thing);
+    }
 }
-
+ 
 // TEST BOOKS
 const lotR = new Book("Lord of the Rings");
 const donQuixote = new Book("Don Quixote");
