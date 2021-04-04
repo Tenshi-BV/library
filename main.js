@@ -1,11 +1,20 @@
 let myLibrary = [];
 
 function Book(name, author, pages, status) {
-    this.name = name;
-    this.author = author;
-    this.pages = pages;
-    this.status = status;
+    this.name = name
+    this.author = author
+    this.pages = pages
+    this.status = status
 }
+
+function addBookToLibrary(book) {
+    myLibrary.push(book);
+}
+
+const lotr = new Book("Lord of the Rings", "JRR Tolkien", 1200, true);
+const donQuixote = new new Book("Don Quixote", "Miguel de Cervantes", 2800, false);
+
+/*
 
 function addBookToLibrary(name) {
     myLibrary.push(name);
@@ -42,9 +51,5 @@ function displayForm() {
         addBookToLibrary(thing);
     }
 }
- 
-// TEST BOOKS
-const lotR = new Book("Lord of the Rings");
-const donQuixote = new Book("Don Quixote");
-addBookToLibrary(lotR);
-addBookToLibrary(donQuixote);
+
+*/
