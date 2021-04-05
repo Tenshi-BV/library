@@ -22,6 +22,9 @@ h1 {
     font-family: cursive;
     font-size: 20px;
     writing-mode: sideways-lr;
+    min-height: 150px;
+    text-align: center;
+    position:relative;
 }
 
 #left {
@@ -42,4 +45,15 @@ h1 {
     background: url(images/plank.jpg);
     height: 30px;
     margin: 0 10% auto 10%;
+}
+
+.delete {
+    background-color: white;
+    color: black;
+    font-size: 10px;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    right: 0px;
+    padding: 5px 2px 5px 2px;
 }

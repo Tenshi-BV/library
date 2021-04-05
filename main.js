@@ -1,5 +1,7 @@
 let myLibrary = [];
 
+const shelf = document.querySelector("#shelf")
+
 function Book(name, author, pages, status) {
     this.name = name
     this.author = author
@@ -11,26 +13,25 @@ function addBookToLibrary(book) {
     myLibrary.push(book);
 }
 
-const lotr = new Book("Lord of the Rings", "JRR Tolkien", 1200, true);
-const donQuixote = new new Book("Don Quixote", "Miguel de Cervantes", 2800, false);
-
-/*
-
-function addBookToLibrary(name) {
-    myLibrary.push(name);
+function displayLibrary() {
+    const del = document.querySelectorAll("#shelf>div");
+    del.forEach((div) => {shelf.removeChild(div);
+    });
+    var titles = myLibrary.map(book => `${book.name}`);
+    var divs = titles.filter(book => createDiv(book));
+    titles.length = 0;
 }
 
-function showTitles() {
-    const mapTitles = myLibrary.map(book => book.name);
-    const createBooks = mapTitles.map(title => createBook(title));
-}
-
-function createBook(book) {
-    const shelf = document.querySelector("#shelf");
+function createDiv(book) {
     const div = document.createElement('div');
-    div.textContent = book;
-    shelf.appendChild(div);
+    div.innerHTML = `<p>${book}</p><button class='delete'>✕</button>`;
+    shelf.appendChild(div);   
 }
+
+const lotr = new Book("Lord of the Rings", "JRR Tolkien", 1200, true);
+const donQuixote = new Book("Don Quixote", "Miguel de Cervantes", 2800, false);
+addBookToLibrary(lotr);
+addBookToLibrary(donQuixote);
 
 const createButton = document.querySelector("#newbook");
 createButton.addEventListener('click', () => displayForm());
@@ -49,7 +50,6 @@ function displayForm() {
     } else {
         const thing = new Book(title, author, pageCount, status);
         addBookToLibrary(thing);
+        displayLibrary();
     }
 }
-
-*/
