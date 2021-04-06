@@ -24,14 +24,22 @@ function displayLibrary() {
 
 function createDiv(book) {
     const div = document.createElement('div');
+    div.setAttribute('data-index', findIndex(book));
     div.innerHTML = `<p>${book}</p><button class='delete'>✕</button>`;
-    shelf.appendChild(div);   
+    shelf.appendChild(div);
+    dOM(book);
+}
+
+function findIndex(book) {
+    const index = myLibrary.findIndex(title => title.name === book);
+    return index;
 }
 
 const lotr = new Book("Lord of the Rings", "JRR Tolkien", 1200, true);
 const donQuixote = new Book("Don Quixote", "Miguel de Cervantes", 2800, false);
 addBookToLibrary(lotr);
 addBookToLibrary(donQuixote);
+displayLibrary();
 
 const createButton = document.querySelector("#newbook");
 createButton.addEventListener('click', () => displayForm());
@@ -52,4 +60,18 @@ function displayForm() {
         addBookToLibrary(thing);
         displayLibrary();
     }
+}
+
+function dOM(book) {
+    index = findIndex(book);
+    const del = document.querySelector(`div[data-index="${index}"`);
+    del.addEventListener('click', () => {
+        removeElement(book);
+    });
+}
+
+function removeElement(book) {
+    var element = findIndex(book);
+    myLibrary.splice(element, 1);
+    displayLibrary();
 }
