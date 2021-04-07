@@ -17,21 +17,30 @@ function displayLibrary() {
     const del = document.querySelectorAll("#shelf>div");
     del.forEach((div) => {shelf.removeChild(div);
     });
-    var titles = myLibrary.map(book => `${book.name}`);
-    var divs = titles.filter(book => createDiv(book));
-    titles.length = 0;
+    var divs = myLibrary.filter(book => createDiv(book));
 }
 
 function createDiv(book) {
     const div = document.createElement('div');
     div.setAttribute('data-index', findIndex(book));
-    div.innerHTML = `<p>${book}</p><button class='delete'>✕</button>`;
+    div.innerHTML = `<p class='title'>${book.name}<br>${book.author}</p><button class='delete'>✕</button><p>${book.pages} p.</p><p>${readibility(book.status)}</p><button class='read'>✓</button>`;
     shelf.appendChild(div);
     dOM(book);
+    check(book);
+}
+
+function readibility(boolean) {
+    let status;
+    if (boolean) {
+        status = "read";
+    } else {
+        status = "unread";
+    }
+    return status;
 }
 
 function findIndex(book) {
-    const index = myLibrary.findIndex(title => title.name === book);
+    const index = myLibrary.indexOf(book);
     return index;
 }
 
@@ -64,7 +73,8 @@ function displayForm() {
 
 function dOM(book) {
     index = findIndex(book);
-    const del = document.querySelector(`div[data-index="${index}"`);
+    const obj = document.querySelector(`div[data-index="${index}"`);
+    const del = obj.querySelector('.delete')
     del.addEventListener('click', () => {
         removeElement(book);
     });
@@ -73,5 +83,22 @@ function dOM(book) {
 function removeElement(book) {
     var element = findIndex(book);
     myLibrary.splice(element, 1);
+    displayLibrary();
+}
+
+function check(book) {
+    const obj = document.querySelector(`div[data-index="${index}"`);
+    const read = obj.querySelector('.read')
+    read.addEventListener('click', () => {
+        tickElement(book);
+    });
+}
+
+function tickElement(book) {
+    if (book.status === true) {
+        book.status = false;
+    } else {
+        book.status = true;
+    }
     displayLibrary();
 }
